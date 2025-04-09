@@ -1,27 +1,29 @@
-public class PracticeProblem {
+public class PracticeProblem{
+        static String[][] maze;
+        static int search(int row, int col){
+                if(maze[row][col].equals("F")){
+                        return 0;
+                }
 
-	public static void main(String args[]) {
+                int min = 999999999;
+                maze[row][col] = "*";
+                for(int i = -1; i < 2; ++i)
+                        for(int j = -1; j < 2; ++j)
+                                if(i == 0 ^ j == 0)
+                                        if(row+i > -1 && row+i < maze.length && col+j > -1 && col+j < maze[row].length && !maze[row+i][col+j].equals("*")){
+                                                int candidate = search(row+i, col+j);
+                                                min = candidate < min ? candidate : min;
+                                        }
+                maze[row][col] = "";
+                return min+1;
+        }
 
-	}
+        static int searchMazeMoves(String[][] arr){
+                maze = arr;
+                int min = search(arr.length-1, 0);
+                if(min > 999999999) return -1;
+                else return min;
+        }
 
-	public static void q1() {
-		//Write question 1 code here
-	}
-
-	public static void q2() {
-		//Write question 2 code here
-	}
-
-	public static void q3() {
-		//Write question 3 code here
-	}
-
-	public static void q4() {
-		//Write question 4 code here
-	}
-
-	public static void q5() {
-		//Write question 5 code here
-	}
-
+        public static void main(String args[]){}
 }
